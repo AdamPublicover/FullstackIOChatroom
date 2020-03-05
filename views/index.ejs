@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- Should update this at some point-->
+        <title> Some socket chatroom</title>
+
+        <link rel="stylesheet" href="index.css">
+
+    </head>
+    <body>
+        <div class="container non-chat-container">
+            <h1>Socket.IO Chat example</h1>
+        </div>
+        <div class="container chat_container">
+            <section>
+                <div id= "update_name" class="form-group name-update-area">
+                    <label for="username"> Change Username: </label><br>
+                    <input id="username" class="form-control-lg" type="text" />
+                    <button id="send_username" type="button" class="btn-lg btn-primary"> Change </button>
+                </div>
+            </section>
+
+            <div class="container overflow-auto">
+                <section id="chatroom">
+                    <section id="feedback"></section>
+                </section>
+            </div>
+
+            <section>
+                <div id="input_zone" class="form-group message-insert-area">
+                    <label for="message"> Enter your message here: </label><br>
+                    <input id="message" class="vertical-align form-control-lg" type="text" />
+                    <button id="send_message" type="button" class="btn-lg btn-primary">SEND</button>
+                </div>
+            </section>
+
+            <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+            <script src="chat.js"></script>
+        </div>
+    </body>
+</html>
