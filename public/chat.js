@@ -1,47 +1,47 @@
 $(function(){
-    //make connection
- var socket = io.connect('http://localhost:3000')
+    
+    //buttons and inputs
+    var message = $("#message")
+    var btn_send_message = $("#send_message")
+    var chatroom = $("#chatroom")
+    var feedback = $("#feedback")
+    var newroomname = $("#newroomname")
+    var btn_changeroom = $("#changeroom")
 
- //buttons and inputs
- var message = $("#message")
- var username = $("#username")
- var send_message = $("#send_message")
- var send_username = $("#send_username")
- var chatroom = $("#chatroom")
- var feedback = $("#feedback")
+    var username = prompt("Please enter your username: ")
+    var query = 'username=' + username;
+    
+    var socket = io.connect('http://localhost:3000', {query: query} )
+    
+    //Emitters
+    btn_send_message.click(function(){
+        var myMessage = message.val()
+        socket.emit('new_msg', {message : myMessage})
+        chatroom.append("<div class='alert alert-success' role='alert'> you: " + myMessage + "</div>")
+        message.val('');
+    })
 
- //Emit message
- send_message.click(function(){
-     socket.emit('new_message', {message : message.val()})
- })
+    message.bind("keypress", () => {
+        socket.emit('typing')
+    })
 
- //Listen zon new_message
- socket.on("new_message", (data) => {
-     feedback.html('');
-     message.val('');
-     console.log("Socket's value - " , data.username)
-     console.log("Client's value -> ", username.val())
-     newUsername = data.username;
-     if (newUsername == username.val()) {
-        chatroom.append("<div class='alert alert-success' role='alert'> you: " + data.message + "</div>")
-     } else {
+    btn_changeroom.click(function() {
+        socket.emit('change_rooms', {room:newroomname.val()})
+    })
+
+
+
+    //Listeners
+    socket.on("new_message", (data) => {
         chatroom.append("<div class='alert alert-warning' role='alert'>" + data.username + ": " + data.message + "</div>")
-     }
-     
- })
+     })
 
- //Emit a username
- send_username.click(function(){
-     socket.emit('change_username', {username : username.val()})
- })
+     socket.on('update_users', (data) => {
+        chatroom.append("<div class='alert alert-primary' role='alert' id='user_event'> [" + data.room + "] " + data.username + " has joined. </div>")
+     })
 
- //Emit typing
- message.bind("keypress", () => {
-     socket.emit('typing')
- })
+     socket.on('typing', (data) => {
+        feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
+     })
 
- //Listen on typing
- socket.on('typing', (data) => {
-     feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
- })
 });
