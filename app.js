@@ -8,6 +8,19 @@ app.get('/', (req, res) => {
 	res.render('index')
 })
 
+app.get('/api/history', (req,res) => {
+    res.download(/*need the history file here - this is the entire JSON file or 'document' from mongoose*/)
+})
+
+app.post('/api/roomhistory', (req,res) => {
+    var roomname = req.param('roomname')
+    res.download(/* need to history file for all where room = roomname */)
+})
+
+app.get('/api/eventlog', (req,res) => {
+    res.download(/* here we need a history json file for all events where user = 'event' or w/e */)
+})
+
 //Listen on port 3000
 server = app.listen(3000)
 
@@ -51,6 +64,7 @@ io.on('connection', function(socket){
 
     // changing rooms ...   
     socket.on('change_rooms', (data) => {
+        socket.to(socket.room).emit('update_users_l', {username: socket.username, room:socket.room})
         socket.leave(socket.room)
         socket.room = data.room
         socket.join(socket.room)

@@ -36,6 +36,10 @@ $(function(){
         chatroom.append("<div class='alert alert-warning' role='alert'>" + data.username + ": " + data.message + "</div>")
      })
 
+     socket.on('update_users_l', (data) => {
+        chatroom.append("<div class='alert alert-primary' role='alert' id='user_event'> [" + data.room + "] " + data.username + " has left. </div>") 
+     })
+
      socket.on('update_users', (data) => {
         chatroom.append("<div class='alert alert-primary' role='alert' id='user_event'> [" + data.room + "] " + data.username + " has joined. </div>")
      })
