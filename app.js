@@ -11,7 +11,6 @@ app.get('/', (req, res) => {
 	res.render('index')
 })
 
-<<<<<<< HEAD
 app.get('/api/history', (req,res) => {
     res.download(/*need the history file here - this is the entire JSON file or 'document' from mongoose*/)
 })
@@ -24,7 +23,6 @@ app.post('/api/roomhistory', (req,res) => {
 app.get('/api/eventlog', (req,res) => {
     res.download(/* here we need a history json file for all events where user = 'event' or w/e */)
 })
-=======
 // server conn here vv
 var mongoDB = 'mongodb+srv://admin:admin@cluster0-tcdzv.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(mongoDB, { useNewUrlParser: true })
@@ -32,7 +30,6 @@ mongoose.connect(mongoDB, { useNewUrlParser: true })
 var db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'MongoDB Connection Error:'))
->>>>>>> c0dd0da6d0a692bf3bc440436fe6bd7076043086
 
 //Listen on port 3000
 server = app.listen(3000)
