@@ -48,4 +48,11 @@ $(function(){
         feedback.html("<p><i>" + data.username + " is typing a message..." + "</i></p>")
      })
 
+     message.keypress(function(e) {
+         if (e.which == 13 ){
+             message.blur();
+             btn_send_message.focus().click()
+         }
+     })
+
 });
