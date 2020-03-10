@@ -12,17 +12,20 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/history', (req,res) => {
-    res.download(/*need the history file here - this is the entire JSON file or 'document' from mongoose*/)
+    var username = req.param('username')
+    res.download(User.find({name: username}))
 })
 
 app.post('/api/roomhistory', (req,res) => {
+    var username = req.param('username')
     var roomname = req.param('roomname')
-    res.download(/* need to history file for all where room = roomname */)
+    res.download(User.find({name: username, room: roomname}))
 })
 
 app.get('/api/eventlog', (req,res) => {
-    res.download(/* here we need a history json file for all events where user = 'event' or w/e */)
+    res.download(User.find({name: 'server', room: 'event'}))
 })
+
 // server conn here vv
 var mongoDB = 'mongodb+srv://admin:admin@cluster0-tcdzv.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(mongoDB, { useNewUrlParser: true })
