@@ -3,7 +3,6 @@
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <!-- Should update this at some point-->
         <title> Chatroom - FS</title>
 
         <link rel="stylesheet" href="index.css">
@@ -17,8 +16,13 @@
             <section>
                 <div id= "update_name" class="form-group name-update-area">
                     <label for="username"> Change Room: </label><br>
-                    <input id="newroomname" class="form-control-lg" type="text" />
-                    <button id="changeroom" type="button" class="btn-lg btn-primary"> Change </button>
+                    <select id="newroomname" class="form-control-inline">
+                        <option>Alpha</option>
+                        <option>Bravo</option>
+                        <option>Charlie</option>
+                        <option>Delta</option>
+                    </select>
+                    <button id="changeroom" type="button" class="btn-sm btn-primary"> Change </button>
                 </div>
             </section>
 
